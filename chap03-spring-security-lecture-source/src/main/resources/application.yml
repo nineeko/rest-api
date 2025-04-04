@@ -1,0 +1,23 @@
+spring:
+  datasource:
+    driver-class-name: org.mariadb.jdbc.Driver
+    url: jdbc:mariadb://localhost:3306/cqrs
+    username: swcamp
+    password: swcamp
+  jpa:
+    hibernate:
+      ddl-auto: create
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+mybatis:
+  configuration:
+    map-underscore-to-camel-case: true
+  mapper-locations: mappers/**/*.xml
+  type-aliases-package: com.neeko.springsecurity.query.dto
+
+jwt:
+  secret: hSstLrMDbZ6yDgJFlNkWg2Xe/KVMeUENYoRcpMXlUKDxVtVM6EmAkmEm8RSz8eZLxKD4pACfaHGKiUqAMsHwBA==
+  expiration: 1800000 # ?????  30? (access token)
+  refresh-expiration: 604800000 # 7? (refresh token)
