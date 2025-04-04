@@ -6,4 +6,7 @@
   <select id="findUserByUsername" resultType="UserDTO">
       SELECT username, role FROM users WHERE username = #{ username }
   </select>
+  <select id="findAllUsers" resultType="UserDTO">
+      SELECT username, role FROM users WHERE role = 'USER'
+  </select>
 </mapper>

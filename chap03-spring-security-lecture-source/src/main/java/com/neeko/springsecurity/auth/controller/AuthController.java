@@ -1,7 +1,8 @@
-package com.neeko.springsecurity.command.controller;
+package com.neeko.springsecurity.auth.controller;
 
 
 import com.neeko.springsecurity.auth.dto.LoginRequest;
+import com.neeko.springsecurity.auth.dto.RequestTokenRequest;
 import com.neeko.springsecurity.auth.dto.TokenResponse;
 import com.neeko.springsecurity.auth.service.AuthService;
 import com.neeko.springsecurity.common.ApiResponse;
@@ -23,5 +24,19 @@ public class AuthController {
     public ResponseEntity<ApiResponse<TokenResponse>> login(@RequestBody LoginRequest request) {
         TokenResponse token = authService.login(request);
         return ResponseEntity.ok(ApiResponse.success(token));
+    }
+    @PostMapping("/refresh")
+    public ResponseEntity<ApiResponse<TokenResponse>> refreshToken(
+            @RequestBody RequestTokenRequest request
+    ){
+        TokenResponse response = authService.refreshToken(request.getRefreshToken());
+        return ResponseEntity.ok(ApiResponse.success(response));
+    }
+
+    @PostMapping("/logout")
+    public ResponseEntity<ApiResponse<Void>> logout(@RequestBody RequestTokenRequest request) {
+        authService.logout(request.getRefreshToken());
+
+        return ResponseEntity.ok(ApiResponse.success(null));
     }
 }

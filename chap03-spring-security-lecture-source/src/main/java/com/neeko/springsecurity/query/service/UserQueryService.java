@@ -2,11 +2,13 @@ package com.neeko.springsecurity.query.service;
 
 import com.neeko.springsecurity.query.dto.UserDTO;
 import com.neeko.springsecurity.query.dto.UserDetailResponse;
+import com.neeko.springsecurity.query.dto.UserListResponse;
 import com.neeko.springsecurity.query.mapper.UserMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -18,4 +20,10 @@ public class UserQueryService {
         return UserDetailResponse.builder().user(user).build();
     }
 
+    public UserListResponse getAllUsers() {
+        List<UserDTO> users = userMapper.findAllUsers();
+        return UserListResponse.builder()
+                .users(users)
+                .build();
+    }
 }
